@@ -1,0 +1,16 @@
+# Utilizar una imagen base oficial de PHP con Apache
+FROM php:7.4-apache
+
+# Instalar extensiones de PHP si es necesario
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Copiar los archivos de la aplicación al contenedor
+COPY . /var/www/html/form-v2
+
+# Dar permisos al directorio de Apache
+RUN chown -R www-data:www-data /var/www/html/form-v2
+
+# Exponer el puerto por el que Apache escucha
+EXPOSE 80
+
+# El contenedor ya está configurado para arrancar Apache, así que no es necesario añadir un CMD
